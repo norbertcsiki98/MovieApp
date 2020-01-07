@@ -70,5 +70,43 @@ public class Movie  {
         return release_date;
     }
 
+    public void setPopularity(float popularity) {
+        this.popularity = popularity;
+    }
 
+    public void setVote_count(long vote_count) {
+        this.vote_count = vote_count;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
+    }
+
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setVote_average(Double vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public void setRelease_date(Date release_date) {
+        this.release_date = release_date;
+    }
 }

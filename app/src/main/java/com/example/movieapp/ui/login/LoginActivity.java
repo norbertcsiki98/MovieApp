@@ -1,5 +1,6 @@
 package com.example.movieapp.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.movieapp.MainActivity;
 import com.example.movieapp.R;
 import com.example.movieapp.database.DatabaseHelper;
-import com.example.movieapp.ui.home.HomeFragment;
 import com.example.movieapp.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     Button signUpButton, loginButton;
     EditText usernameView, passwordView;
     DatabaseHelper db;
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +55,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean CheckEmailPassword = db.checkLogin(username, password);
                 if (CheckEmailPassword) {
+                    SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                    prefs.edit().putString("username", username).apply();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("username", username);
                     startActivity(intent);
-                    Toast.makeText(v.getContext(),"Successfully login",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Successfully login", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
                 }

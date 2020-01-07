@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.CompoundButton;
+import android.widget.SearchView;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -33,9 +35,7 @@ public class HomeFragment extends Fragment {
     public static final String TAG = HomeFragment.class.getCanonicalName();
     private HomeViewModel homeViewModel;
     private View rootView;
-    Switch aSwitch;
-
-
+    String SEARCH_URL = "https://www.themoviedb.org/search";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,11 +69,11 @@ public class HomeFragment extends Fragment {
         MovieInterface service = retrofit.create(MovieInterface.class);
 
         final RecyclerView recyclerView = rootView.findViewById(R.id.movie_recyclerview);
-        aSwitch = rootView.findViewById(R.id.switch1);
+
         Call<MovieResponse> call = service.getMovies(MovieInterface.API_KEY);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<MovieResponse> call, final Response<MovieResponse> response) {
                 if (response.body() == null || response.body().getList() == null) {
                     Log.d(TAG, "Success, empty list!");
                 } else {
@@ -82,8 +82,15 @@ public class HomeFragment extends Fragment {
                     GridLayoutManager layoutManager = new GridLayoutManager(rootView.getContext(), 1);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(new MovieAdapter(response.body().getList()));
+
                 }
+
+
             }
+
+
+
+
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {

@@ -44,8 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
                 confirmpassword = confirmpasswordView.getText().toString();
                 if (checkDataEntered() == true) {
                     if (password.equals(confirmpassword)) {
-                        if (db.checkEmail(email) == true) {
-                            boolean insert = db.insertUser(username, email, password);
+                        if ( true) {
+                            boolean insert = db.insertUser(username, password);
                             if (insert == true) {
                                 Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

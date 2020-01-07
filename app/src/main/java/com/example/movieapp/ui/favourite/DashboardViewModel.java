@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.dashboard;
+package com.example.movieapp.ui.favourite;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
